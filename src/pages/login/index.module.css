@@ -1,0 +1,64 @@
+.loginContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--three);
+}
+
+.loginContainer form {
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+  background-color: #fff;
+  align-items: center;
+  justify-content: center;
+  min-width: 320px;
+  padding: 64px 16px;
+  border-radius: 4px;
+}
+
+.loginContainer form h2 {
+  font-size: 36px;
+  margin-bottom: 24px;
+}
+
+.loginContainer form div {
+  display: flex;
+  gap: 2px;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.loginContainer form div label {
+  font-weight: 700;
+  font-style: italic;
+}
+
+.loginContainer form button {
+  color: #fff;
+  border: none;
+  outline: none;
+  padding: 12px 4px;
+  min-width: 88%;
+  max-width: 88%;
+  font-weight: 900;
+  border-radius: 4px;
+  font-size: 22px;
+  background-color: var(--three);
+}
+
+.loginContainer form div input {
+  border-radius: 4px;
+  outline: none;
+  border: 1px solid var(--gray);
+  padding: 12px 4px;
+  width: 88%;
+}
+
+.loginContainer form div input:focus {
+  border: 1px solid var(--three);
+}
