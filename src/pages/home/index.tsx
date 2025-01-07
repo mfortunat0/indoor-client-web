@@ -1,7 +1,8 @@
 import style from "./index.module.css";
-import { FormEvent, useEffect, useState } from "react";
 import axios from "axios";
+import { FormEvent, useEffect, useState } from "react";
 import { FaX } from "react-icons/fa6";
+import { toast } from "react-toastify";
 
 interface ResponseListFiles {
   medias: string[];
@@ -27,6 +28,38 @@ export function Home() {
       console.log(error);
     });
   }, []);
+
+  const onUploadFile = async () => {
+    const videoFile = document.querySelector<HTMLInputElement>("#videoFile");
+    if (videoFile && videoFile.files && videoFile.files[0]) {
+      const formData = new FormData();
+      formData.append("client", "example");
+      formData.append("file", videoFile.files[0]);
+
+      toast.promise(
+        axios.post(`${import.meta.env.VITE_SERVER_URL}/file`, formData),
+        {
+          pending: "Subindo arquivo",
+          success: {
+            render: () => {
+              setTimeout(() => {
+                getListFiles();
+              }, 3000);
+              return "Arquivo salvo com sucesso";
+            },
+          },
+          error: {
+            render(error) {
+              return `Erro: ${error}`;
+            },
+          },
+        },
+        {
+          theme: "colored",
+        }
+      );
+    }
+  };
 
   const removeMedia = async (name: string) => {
     if (confirm(`Deseja remover o video ${name}??`)) {
@@ -65,7 +98,9 @@ export function Home() {
           checkbox.checked = false;
         }
       });
-      alert("Updated");
+      toast.success("Vitrine atualizada", {
+        theme: "colored",
+      });
     }
   };
 
@@ -81,7 +116,10 @@ export function Home() {
                 </button>
                 <video
                   controls
-                  src={`${import.meta.env.VITE_SERVER_URL}/example/${name}`}
+                  src={`${
+                    import.meta.env.VITE_SERVER_URL
+                  }/example/${name}#t=0.5`}
+                  preload="metadata"
                 ></video>
                 <input type="checkbox" id={`video-${name}`} />
               </li>
@@ -89,7 +127,14 @@ export function Home() {
         </ul>
         <form onSubmit={(event: FormEvent) => event.preventDefault()}>
           <button onClick={() => updateVitrine()}>Atualizar Vitrine</button>
-          <button>Subir arquivo</button>
+          <label htmlFor="videoFile">Subir arquivo</label>
+          <input
+            type="file"
+            accept="video/mp4"
+            id="videoFile"
+            onChange={onUploadFile}
+            style={{ display: "none" }}
+          />
         </form>
       </section>
     </main>

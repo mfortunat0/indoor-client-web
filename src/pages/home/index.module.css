@@ -12,7 +12,7 @@
   list-style: none;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 8px;
   justify-content: space-between;
   overflow-y: auto;
   max-height: 75vh;
@@ -25,6 +25,7 @@
 
 .homeContainer section ul li {
   position: relative;
+  width: 45%;
 }
 
 .homeContainer section ul li button {
@@ -59,7 +60,7 @@
 }
 
 .homeContainer section ul li video {
-  width: 170px;
+  width: 100%;
   background-color: #000;
   height: 326px;
 }
@@ -72,7 +73,8 @@
   align-items: center;
 }
 
-.homeContainer section form button {
+.homeContainer section form button,
+.homeContainer section form label {
   color: #fff;
   border: none;
   outline: none;
@@ -85,6 +87,7 @@
   background-color: var(--three);
 }
 
-.homeContainer section form button:last-child {
+.homeContainer section form label {
   background-color: var(--four);
+  text-align: center;
 }

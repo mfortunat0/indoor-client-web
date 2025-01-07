@@ -1,9 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import style from "./index.module.css";
 import { FormEvent } from "react";
+import { toast } from "react-toastify";
 
 export function Login() {
   const navigate = useNavigate();
+
+  const onLogin = async () => {
+    toast.success("Logado com sucesso !!", {
+      theme: "colored",
+    });
+    navigate("/home");
+  };
 
   return (
     <main className={style.loginContainer}>
@@ -19,7 +27,7 @@ export function Login() {
             placeholder="Digite seu password"
           />
         </div>
-        <button onClick={() => navigate("/home")}>Entrar</button>
+        <button onClick={onLogin}>Entrar</button>
       </form>
     </main>
   );
