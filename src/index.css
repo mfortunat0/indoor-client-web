@@ -11,10 +11,6 @@
   --red: #d34116;
 }
 
-html {
-  overflow: hidden;
-}
-
 * {
   margin: 0;
   padding: 0;
