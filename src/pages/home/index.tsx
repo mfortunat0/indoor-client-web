@@ -88,19 +88,25 @@ export function Home() {
     });
 
     if (fileNames.length) {
-      await axios.post(`${import.meta.env.VITE_SERVER_URL}/file/generate`, {
-        client: "example",
-        fileNames,
-      });
-
-      checkBoxs.forEach((checkbox) => {
-        if (checkbox.checked) {
-          checkbox.checked = false;
+      await toast.promise(
+        axios.post(`${import.meta.env.VITE_SERVER_URL}/file/generate`, {
+          client: "example",
+          fileNames,
+        }),
+        {
+          pending: "Atualizando vitrine, aguarde 📡",
+          success: {
+            render() {
+              checkBoxs.forEach((checkbox) => {
+                if (checkbox.checked) {
+                  checkbox.checked = false;
+                }
+              });
+              return "Vitrine atualizada ✅";
+            },
+          },
         }
-      });
-      toast.success("Vitrine atualizada ✅", {
-        theme: "colored",
-      });
+      );
     }
   };
 
