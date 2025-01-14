@@ -36,16 +36,16 @@ export function Home() {
       formData.append("client", "example");
       formData.append("file", videoFile.files[0]);
 
-      toast.promise(
+      await toast.promise(
         axios.post(`${import.meta.env.VITE_SERVER_URL}/file`, formData),
         {
-          pending: "Subindo arquivo",
+          pending: "Subindo arquivo, aguarde 📡",
           success: {
             render: () => {
               setTimeout(() => {
                 getListFiles();
               }, 3000);
-              return "Arquivo salvo com sucesso";
+              return "Arquivo salvo com sucesso!! 🎉";
             },
           },
           error: {
@@ -98,7 +98,7 @@ export function Home() {
           checkbox.checked = false;
         }
       });
-      toast.success("Vitrine atualizada", {
+      toast.success("Vitrine atualizada ✅", {
         theme: "colored",
       });
     }

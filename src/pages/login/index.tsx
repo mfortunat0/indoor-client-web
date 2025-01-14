@@ -7,9 +7,7 @@ export function Login() {
   const navigate = useNavigate();
 
   const onLogin = async () => {
-    toast.success("Logado com sucesso !!", {
-      theme: "colored",
-    });
+    toast.success("Bem vindo!! 👋", {});
     navigate("/home");
   };
 
