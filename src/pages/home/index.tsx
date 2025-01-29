@@ -11,10 +11,12 @@ interface ResponseListFiles {
 export function Home() {
   const [listFiles, setListFiles] = useState<string[]>();
 
+  console.log(`http://${process.env.LOCAL_IP}:2809/file/list/example`);
+
   const getListFiles = async () => {
     try {
       const { data } = await axios.get<ResponseListFiles>(
-        `${import.meta.env.VITE_SERVER_URL}/file/list/example`
+        `http://${process.env.LOCAL_IP}:2809/file/list/example`
       );
       const listFilesMp4 = data.medias.filter((name) => name.includes(".mp4"));
       setListFiles(listFilesMp4);
@@ -37,7 +39,7 @@ export function Home() {
       formData.append("file", videoFile.files[0]);
 
       await toast.promise(
-        axios.post(`${import.meta.env.VITE_SERVER_URL}/file`, formData),
+        axios.post(`http://${process.env.LOCAL_IP}:2809/file`, formData),
         {
           pending: "Subindo arquivo, aguarde 📡",
           success: {
@@ -63,7 +65,7 @@ export function Home() {
 
   const removeMedia = async (name: string) => {
     if (confirm(`Deseja remover o video ${name}??`)) {
-      await axios.delete(`${import.meta.env.VITE_SERVER_URL}/file`, {
+      await axios.delete(`http://${process.env.LOCAL_IP}:2809/file`, {
         data: {
           client: "example",
           name,
@@ -89,7 +91,7 @@ export function Home() {
 
     if (fileNames.length) {
       await toast.promise(
-        axios.post(`${import.meta.env.VITE_SERVER_URL}/file/generate`, {
+        axios.post(`http://${process.env.LOCAL_IP}:2809/file/generate`, {
           client: "example",
           fileNames,
         }),
@@ -122,9 +124,7 @@ export function Home() {
                 </button>
                 <video
                   controls
-                  src={`${
-                    import.meta.env.VITE_SERVER_URL
-                  }/example/${name}#t=0.5`}
+                  src={`http://${process.env.LOCAL_IP}:2809/example/${name}#t=0.5`}
                   preload="metadata"
                 ></video>
                 <input type="checkbox" id={`video-${name}`} />
